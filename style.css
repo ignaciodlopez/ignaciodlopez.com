@@ -1367,8 +1367,6 @@ button:focus {
 	
 }
 
-
-
 @media (max-width: 320px){
 	
 	
@@ -1377,3 +1375,34 @@ button:focus {
 	
 }
 
+
+/*--------------------*/
+/* CUSTOM FIXES */
+/*--------------------*/
+
+/* Fix para evitar solapamiento del contacto con portfolio */
+#mu-portfolio {
+	position: relative;
+}
+
+#mu-contact {
+	position: relative;
+	background-color: #fff;
+	clear: both;
+}
+
+/* Fix para que el portfolio se vea completo */
+.filtr-item {
+	margin-bottom: 30px !important;
+}
+
+.mu-portfolio-content .filtr-container {
+	overflow: visible !important;
+	min-height: auto;
+}
+
+/* Asegurar que los iconos se vean correctamente */
+.mu-contact-top-single .mu-icon i {
+	display: inline-block;
+	line-height: inherit;
+}
