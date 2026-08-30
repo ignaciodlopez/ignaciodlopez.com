@@ -697,6 +697,10 @@ button:focus {
 	width: 100%;
 }
 
+.filtr-item.mu-portfolio-hidden-item {
+	display: none;
+}
+
 .mu-item-thumbonail img{
 	-webkit-transform: scale(1);
 	        transform: scale(1);

@@ -154,15 +154,44 @@
 
 	/* ----------------------------------------------------------- */
 	/*  6. PORTFOLIO GALLERY
-	/* ----------------------------------------------------------- */ 
+	/* ----------------------------------------------------------- */
 		$('.filtr-container').filterizr();
+
+		// On the "Todo" filter, only show the first 6 cards. Individual
+		// category filters already have 6 or fewer items, so they are
+		// left untouched.
+		var $portfolioItems = $('.filtr-container').find('.filtr-item');
+		var portfolioVisibleLimit = 6;
+
+		function updatePortfolioLimit() {
+			var isAllFilter = $('.mu-simplefilter li.active').data('filter') === 'all';
+			var shouldHide = isAllFilter && $portfolioItems.length > portfolioVisibleLimit;
+			$portfolioItems.filter(':gt(' + (portfolioVisibleLimit - 1) + ')').toggleClass('mu-portfolio-hidden-item', shouldHide);
+		}
+
+		// Filterizr measures each item's height on init, but lazy-loaded
+		// images may still be empty at that point, causing overlapping
+		// tiles. Force Filterizr's own resize recalculation once each
+		// image has actually loaded.
+		$('.filtr-container img').each(function() {
+			if (this.complete) {
+				$(window).trigger('resize');
+			} else {
+				$(this).on('load', function() {
+					$(window).trigger('resize');
+				});
+			}
+		});
 
 		//Simple filter controls
 
 	    $('.mu-simplefilter li').click(function() {
 	        $('.mu-simplefilter li').removeClass('active');
 	        $(this).addClass('active');
+	        updatePortfolioLimit();
 	    });
+
+		updatePortfolioLimit();
 
 	/* ----------------------------------------------------------- */
 	/*  7. PORTFOLIO POPUP VIEW ( IMAGE LIGHTBOX )
